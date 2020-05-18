@@ -11,10 +11,10 @@ namespace Domain.Models
     {
         public long Id { get; set; }
         public string Author { get; set; }
-        [MinLength(5, ErrorMessage = "Content to be longer than 5 characters")]
+        //[MinLength(5, ErrorMessage = "Content to be longer than 5 characters")]
         public string Content { get; set; }
         public bool Important { get; set; }
-        [Required]
+        //[Required]
         public int SarcinaId { get; set; }
         
     }
