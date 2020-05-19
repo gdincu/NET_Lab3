@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 
 namespace NET_Lab3
 {
+    #pragma warning disable CS1591
     public class Program
     {
         public static void Main(string[] args)
@@ -45,4 +46,5 @@ namespace NET_Lab3
                     webBuilder.UseStartup<Startup>();
                 });
     }
+#pragma warning disable CS1591
 }

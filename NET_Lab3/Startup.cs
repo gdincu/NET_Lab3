@@ -53,14 +53,13 @@ namespace NET_Lab3
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = "v1",
-                    Title = "ToDo API",
-                    Description = "A simple example ASP.NET Core Web API",
-                    TermsOfService = new Uri("https://example.com/terms"),
+                    Title = "Lab3 API",
+                    Description = "Agenda de task-uri ASP.NET Core Web API",
+                    TermsOfService = new Uri("https://github.com/gdincu"),
                     Contact = new OpenApiContact
                     {
-                        Name = "Shayne Boyer",
-                        Email = string.Empty,
-                        Url = new Uri("https://twitter.com/spboyer"),
+                        Name = "ID",
+                        Email = "id@id.com"
                     },
                     License = new OpenApiLicense
                     {
@@ -68,6 +67,10 @@ namespace NET_Lab3
                         Url = new Uri("https://example.com/license"),
                     }
                 });
+                // Set the comments path for the Swagger JSON and UI.
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
             });
 
             services.AddControllers();

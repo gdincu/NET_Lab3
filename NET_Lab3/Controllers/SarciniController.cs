@@ -22,6 +22,9 @@ namespace Controllers
         }
 
         // GET: api/Sarcini
+        /// <summary>
+        /// Returns a set of items.
+        /// </summary>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Sarcina>>> GetSarcini(DateTimeOffset? from = null, DateTimeOffset? to = null)
         {
@@ -39,6 +42,24 @@ namespace Controllers
         }
 
         // GET: api/Sarcini/5
+        /// <summary>
+        /// Returns a specific item.
+        /// </summary>
+        /// /// <remarks>
+        /// Sample request:
+        ///
+        ///     POST /Todo
+        ///     {
+        ///        "id": 1,
+        ///        "name": "Item1",
+        ///        "isComplete": true
+        ///     }
+        ///
+        /// </remarks>
+        /// <param name="item"></param>
+        /// <returns>A newly created TodoItem</returns>
+        /// <response code="201">Returns the newly created item</response>
+        /// <response code="400">If the item is null</response>  
         [HttpGet("{id}")]
         public async Task<ActionResult<Sarcina>> GetSarcina(int id)
         {
@@ -55,6 +76,9 @@ namespace Controllers
         // PUT: api/Sarcini/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        /// <summary>
+        /// Updates a specific item.
+        /// </summary>
         [HttpPut("{id}")]
         public async Task<IActionResult> PutSarcina(int id, Sarcina sarcina)
         {
@@ -97,6 +121,9 @@ namespace Controllers
         // POST: api/Sarcini
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        /// <summary>
+        /// Adds an item.
+        /// </summary>
         [HttpPost]
         public async Task<ActionResult<Sarcina>> PostSarcina(Sarcina sarcina)
         {
@@ -107,7 +134,11 @@ namespace Controllers
         }
 
         // DELETE: api/Sarcini/5
+        /// <summary>
+        /// Deletes a specific item.
+        /// </summary>
         [HttpDelete("{id}")]
+        
         public async Task<ActionResult<Sarcina>> DeleteSarcina(int id)
         {
             var sarcina = await _context.Sarcini.FindAsync(id);
