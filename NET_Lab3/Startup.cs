@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.IO;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using FluentValidation;
@@ -18,6 +19,7 @@ using Microsoft.Extensions.Logging;
 using NET_Lab3.Domain.ModelValidators;
 using Persistence.Contexts;
 using TaskManager.Domain.Models;
+using Microsoft.OpenApi.Models;
 
 namespace NET_Lab3
 {
@@ -45,6 +47,28 @@ namespace NET_Lab3
             services.AddDbContext<AppDbContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("Tasks")));
             //Registering validators with the services collection
             services.AddTransient<IValidator<Sarcina>, SarcinaValidator>();
+            // Register the Swagger generator, defining 1 or more Swagger documents
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "ToDo API",
+                    Description = "A simple example ASP.NET Core Web API",
+                    TermsOfService = new Uri("https://example.com/terms"),
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Shayne Boyer",
+                        Email = string.Empty,
+                        Url = new Uri("https://twitter.com/spboyer"),
+                    },
+                    License = new OpenApiLicense
+                    {
+                        Name = "Use under LICX",
+                        Url = new Uri("https://example.com/license"),
+                    }
+                });
+            });
 
             services.AddControllers();
         }
@@ -56,6 +80,16 @@ namespace NET_Lab3
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Lab3 API V1");
+                //c.RoutePrefix = string.Empty;
+            });
 
             app.UseHttpsRedirection();
 
