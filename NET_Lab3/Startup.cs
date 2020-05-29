@@ -32,6 +32,8 @@ namespace NET_Lab3
 
         public IConfiguration Configuration { get; }
 
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -43,6 +45,22 @@ namespace NET_Lab3
                 options.JsonSerializerOptions.IgnoreNullValues = true;
                 })
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly()));
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                                  builder =>
+                                  {
+                                      /*builder.WithOrigins("http://localhost:4200/")
+                                      .AllowAnyHeader()
+                                      .AllowAnyMethod()
+                                      .AllowAnyOrigin();*/
+
+                                      builder.AllowAnyOrigin()
+                                      .AllowAnyHeader()
+                                      .AllowAnyMethod();
+                                  });
+            });
 
             services.AddDbContext<AppDbContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("Tasks")));
             //Registering validators with the services collection
@@ -97,6 +115,10 @@ namespace NET_Lab3
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseStaticFiles();
+
+            app.UseCors(MyAllowSpecificOrigins);
 
             app.UseAuthorization();
 

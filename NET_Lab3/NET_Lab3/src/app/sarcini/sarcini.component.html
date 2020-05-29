@@ -1,0 +1,28 @@
+<h1 id="tableLabel">Sarcini</h1>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="sarcini">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Added</th>
+      <th>Deadline</th>
+      <th>Importance</th>
+      <th>Stare</th>
+      <th>ClosedAt</th>
+      <th># of Comments</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let sarcina of sarcini">
+      <td>{{ sarcina.title }}</td>
+      <td>{{ sarcina.description }}</td>
+      <td>{{ sarcina.added }}</td>
+      <td>{{ sarcina.deadline }}</td>
+      <td>{{ sarcina.importance }}</td>
+      <td>{{ sarcina.stare }}</td>
+      <td>{{ sarcina.closedat }}</td>
+      <td>{{ sarcina.comments.length }}</td>
+    </tr>
+  </tbody>
+</table>
